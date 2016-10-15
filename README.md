@@ -1,10 +1,11 @@
 ## Using Auth0 with Servlets and JSP technology for Single Sign On (SSO) between two websites
 
-### Background
+This is a companion sample for the [Auth0 Servlet](https://github.com/auth0/auth0-servlet) library.
+Please refer to that library and documentation for further information specific to the library itself.
 
-This folder contains a plain Java solution (Servlet / JSP only) that contains two demo websites that have
-been developed to demonstrate the Auth0 SSO capabilities between a main "portal" website and a Partner website
-that depends on the main "portal" site for SSO authentication.
+Perhaps the best way to learn how to use this library is to study the [Auth0 Servlet Sample](https://github.com/auth0-samples/auth0-servlet-sample) source code together with its README file. The contents of this sample build upon the Auth0 Servlet Sample.
+
+This Auth0 Servlet SSO Sample uses plain Java Servlet / JSP technology to demonstration Single Sign On (SSO). The sample consists of two demo websites that have been developed to demonstrate the Auth0 SSO capabilities between a main "portal" website and a Partner website that depends on the main "portal" site for SSO authentication.
 
 ### Contents
 
