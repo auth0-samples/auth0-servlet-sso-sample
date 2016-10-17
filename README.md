@@ -92,6 +92,8 @@ Go to `Users` and select `CREATE USER`
 Create a user with a username / password of your choosing, and ensure the database connection defined above is
 associated with that user.
 
+OPTIONAL: Setup a Social Connection, for example Google, and and ensure app1 and app2 both reference this social connection.
+
 
 Ok, that's all the Auth0 Dashboard setup done!
 
