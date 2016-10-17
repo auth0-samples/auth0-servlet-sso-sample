@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/jquery.growl.css"/>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="http://cdn.auth0.com/js/lock/10.4.0/lock.min.js"></script>
-    <script src="http://cdn.auth0.com/w2/auth0-6.8.js"></script>
+    <script src="//cdn.auth0.com/w2/auth0-7.2.1.js"></script>
     <script src="/js/jquery.growl.js" type="text/javascript"></script>
 </head>
 <body>
@@ -21,7 +21,8 @@
             var auth0 = new Auth0({
                 domain: '${domain}',
                 clientID: '${clientId}',
-                callbackURL: '${fn:replace(pageContext.request.requestURL, pageContext.request.requestURI, '')}${loginCallback}'
+                callbackURL: '${fn:replace(pageContext.request.requestURL, pageContext.request.requestURI, '')}${loginCallback}',
+                responseType: 'code'
             });
             auth0.getSSOData(function (err, data) {
                 if (data && data.sso === true) {
@@ -41,8 +42,7 @@
                         // have SSO session but no valid local session - auto-login user
                         auth0.login({
                             scope: 'openid name email picture',
-                            state: '${state}',
-                            connection: '${connection}'
+                            state: '${state}'
                         }, function (err) {
                             // this only gets called if there was a login error
                             console.error('Error logging in: ' + err);
@@ -80,7 +80,7 @@
                     });
                     // delay to allow welcome message..
                     setTimeout(function () {
-                        lock.show({allowedConnections: ['${connection}']});
+                        lock.show();
                     }, 1500);
                     </c:otherwise>
                     </c:choose>

@@ -8,23 +8,23 @@
     <title>Home Page</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
-    <link rel="stylesheet" type="text/css" href="/css/home.css">
     <link rel="stylesheet" type="text/css" href="/css/jquery.growl.css"/>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="/js/jquery.growl.js" type="text/javascript"></script>
-    <script src="http://cdn.auth0.com/w2/auth0-6.8.js"></script>
+    <script src="//cdn.auth0.com/w2/auth0-7.2.1.js"></script>
 </head>
 <body>
 
 <script type="text/javascript">
     // hide the page in case there is an SSO session (to avoid flickering)
     $('body').hide();
+
     var auth0Logout = function () {
         var options = {
             client_id: '${clientId}',
             returnTo: '${fn:replace(pageContext.request.requestURL, pageContext.request.requestURI, '')}${logoutEndpoint}'
         };
-        return auth0.logout(options);
+        return auth0.logout(options, {version: 'v2'});
     };
     // check SSO status
     var auth0 = new Auth0({
@@ -47,13 +47,13 @@
                 </c:otherwise>
             </c:choose>
 
+
             if (!loggedIn || (loggedInUserId !== data.lastUsedUserID)) {
                 // have SSO session but no valid local session - auto-login user
                 console.log("SSO Session but NOT locally authenticated ");
                 auth0.login({
                     scope: 'openid name email picture',
-                    state: '${state}',
-                    connection: '${connection}'
+                    state: '${state}'
                 }, function (err) {
                     // this only gets called if there was a login error
                     console.error('Error logging in: ' + err);

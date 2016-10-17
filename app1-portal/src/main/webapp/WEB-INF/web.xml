@@ -105,11 +105,13 @@
         <param-value>{CLIENT_SECRET}</param-value>
     </context-param>
 
+
     <context-param>
         <param-name>auth0.connection</param-name>
         <param-value>{CONNECTION}</param-value>
     </context-param>
 
+    <!-- only required for custom login pages since lock logins can also use Social connections too for SSO -->
     <context-param>
         <param-name>auth0.signing_algorithm</param-name>
         <param-value>HS256</param-value>

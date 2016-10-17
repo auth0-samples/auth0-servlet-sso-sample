@@ -8,11 +8,10 @@
     <title>Home Page</title>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/jumbotron-narrow.css">
-    <link rel="stylesheet" type="text/css" href="/css/home.css">
     <link rel="stylesheet" type="text/css" href="/css/jquery.growl.css"/>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="/js/jquery.growl.js" type="text/javascript"></script>
-    <script src="http://cdn.auth0.com/w2/auth0-6.8.js"></script>
+    <script src="//cdn.auth0.com/w2/auth0-7.2.1.js"></script>
 </head>
 <body>
 <script type="text/javascript">
@@ -23,7 +22,7 @@
             client_id: '${clientId}',
             returnTo: '${fn:replace(pageContext.request.requestURL, pageContext.request.requestURI, '')}${logoutEndpoint}'
         };
-        return auth0.logout(options);
+        return auth0.logout(options, {version: 'v2'});
     };
 
     // check SSO status
@@ -38,22 +37,21 @@
             // have SSO session
             console.log('SSO: an Auth0 SSO session already exists');
             <c:choose>
-                <c:when test="${authenticated}">
-                    var loggedIn = true;
-                    var loggedInUserId = '${user.userId}';
-                </c:when>
-                <c:otherwise>
-                    var loggedIn = false;
-                    var loggedInUserId = '';
-                </c:otherwise>
+            <c:when test="${authenticated}">
+            var loggedIn = true;
+            var loggedInUserId = '${user.userId}';
+            </c:when>
+            <c:otherwise>
+            var loggedIn = false;
+            var loggedInUserId = '';
+            </c:otherwise>
             </c:choose>
 
             if (!loggedIn || (loggedInUserId !== data.lastUsedUserID)) {
                 // have SSO session but no valid local session - auto-login user
                 auth0.login({
                     scope: 'openid name email picture',
-                    state: '${state}',
-                    connection: '${connection}'
+                    state: '${state}'
                 }, function (err) {
                     // this only gets called if there was a login error
                     console.error('Error logging in: ' + err);
@@ -62,7 +60,7 @@
                 // have SSO session and valid user - display page
                 $('body').show();
                 $.growl({title: "Welcome  ${user.nickname}", message: "We hope you enjoy using the Portal Site!"});
-                $("#logout").click(function(e) {
+                $("#logout").click(function (e) {
                     e.preventDefault();
                     $("#home").removeClass("active");
                     $("#logout").addClass("active");
@@ -77,46 +75,46 @@
 </script>
 
 <c:if test="${authenticated}">
-<div class="container">
-    <div class="header clearfix">
-        <nav>
-            <ul class="nav nav-pills pull-right">
-                <li class="active" id="home"><a href="#">Home</a></li>
-                <li id="logout"><a href="#">Logout</a></li>
-            </ul>
-        </nav>
-        <h3 class="text-muted">Portal Homepage</h3>
-    </div>
-    <div class="jumbotron">
-        <h3>Hello ${user.name}!</h3>
-        <p class="lead">Your nickname is: ${user.nickname}</p>
-        <p class="lead">Your user id is: ${user.userId}</p>
-        <p><img class="avatar" src="${user.picture}"/></p>
-    </div>
-    <div class="row marketing">
-        <div class="col-lg-6">
-            <h4>Subheading</h4>
-            <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+    <div class="container">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li class="active" id="home"><a href="#">Home</a></li>
+                    <li id="logout"><a href="#">Logout</a></li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Portal Homepage</h3>
+        </div>
+        <div class="jumbotron">
+            <h3>Hello ${user.name}!</h3>
+            <p class="lead">Your nickname is: ${user.nickname}</p>
+            <p class="lead">Your user id is: ${user.userId}</p>
+            <p><img class="avatar" src="${user.picture}"/></p>
+        </div>
+        <div class="row marketing">
+            <div class="col-lg-6">
+                <h4>Subheading</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
 
-            <h4>Subheading</h4>
-            <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
-                fermentum.</p>
+                <h4>Subheading</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
+                    fermentum.</p>
+            </div>
+
+            <div class="col-lg-6">
+                <h4>Subheading</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+                <h4>Subheading</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
+                    fermentum.</p>
+            </div>
         </div>
 
-        <div class="col-lg-6">
-            <h4>Subheading</h4>
-            <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-            <h4>Subheading</h4>
-            <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet
-                fermentum.</p>
-        </div>
+        <footer class="footer">
+            <p> &copy; 2016 Company Inc</p>
+        </footer>
     </div>
-
-    <footer class="footer">
-        <p> &copy; 2016 Company Inc</p>
-    </footer>
-</div>
 </c:if>
 
 </body>

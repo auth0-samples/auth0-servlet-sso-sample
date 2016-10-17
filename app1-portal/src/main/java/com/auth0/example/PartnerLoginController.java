@@ -20,7 +20,7 @@ public class PartnerLoginController extends BaseController {
 
     protected List trustedExternalReturnUrls;
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws ServletException, IOException {
         logger.debug("Performing partner login");
 
         final String externalReturnUrl = req.getParameter("externalReturnUrl");

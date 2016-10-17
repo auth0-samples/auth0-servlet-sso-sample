@@ -34,7 +34,7 @@
             });
             // delay to allow welcome message..
             setTimeout(function () {
-                lock.show({allowedConnections: ['${connection}']});
+                lock.show();
             }, 1500);
         });
     </script>

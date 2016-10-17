@@ -1,5 +1,6 @@
 package com.auth0.example;
 
+import com.auth0.NonceUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,12 +14,13 @@ public class LogoutController extends HttpServlet {
 
     private static final Logger logger = LogManager.getLogger(LogoutController.class);
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws ServletException, IOException {
         logger.debug("LogoutController");
-        if (request.getSession() != null) {
-            request.getSession().invalidate();
+        if (req.getSession() != null) {
+            req.getSession().invalidate();
         }
-        response.sendRedirect(getServletConfig().getInitParameter("on_logout_redirect_to"));
+        NonceUtils.removeNonceFromStorage(req);
+        res.sendRedirect(getServletConfig().getInitParameter("on_logout_redirect_to"));
     }
 
 }
