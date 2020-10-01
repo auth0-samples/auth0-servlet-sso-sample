@@ -5,7 +5,7 @@ Please refer to that library and documentation for further information specific 
 
 Perhaps the best way to learn how to use this library is to study the [Auth0 Servlet Sample](https://github.com/auth0-samples/auth0-servlet-sample) source code together with its README file. The contents of this sample build upon the Auth0 Servlet Sample.
 
-This Auth0 Servlet SSO Sample uses plain Java Servlet / JSP technology to demonstration Single Sign On (SSO). The sample consists of two demo websites that have been developed to demonstrate the Auth0 SSO capabilities between a main "portal" website and a Partner website that depends on the main "portal" site for SSO authentication.
+This Auth0 Servlet SSO Sample uses plain Java Servlet / JSP technology to demonstrate Single Sign-On (SSO). The sample consists of two demo websites that have been developed to demonstrate the Auth0 SSO capabilities between a main "portal" website and a Partner website that depends on the main "portal" site for SSO authentication.
 
 ### Contents
 
@@ -15,7 +15,7 @@ app1.com - main "portal" website
 
 app2.com - partner website
 
-The aim of this solution is to provide a simple, no-frills sample developers can follow to understand the orchestration
+The aim of this solution is to provide simple, no-frills sample developers can follow to understand the orchestration
 required to achieve SSO using Auth0 using Java, without having to also cope with understanding additional libraries or frameworks.
 
 #### Sequence Diagrams
@@ -89,16 +89,16 @@ Define a `database connection` and ensure app1 and app2 both reference this `con
 
 Go to `Users` and select `CREATE USER`
 
-Create a user with a username / password of your choosing, and ensure the database connection defined above is
+Create a user with a username/password of your choosing, and ensure the database connection defined above is
 associated with that user.
 
-OPTIONAL: Setup a Social Connection, for example Google, and and ensure app1 and app2 both reference this social connection.
+OPTIONAL: Setup a Social Connection, for example, Google, and ensure app1 and app2 both reference this social connection.
 
 
 Ok, that's all the Auth0 Dashboard setup done!
 
 
-#### Update your hosts file
+#### Update your host's file
 
 Update your `hosts` file so you can reference the apps by name, rather than localhost / 127.0.0.1
 
